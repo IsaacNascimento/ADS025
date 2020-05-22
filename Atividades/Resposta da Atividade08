@@ -1,0 +1,3 @@
+Projeto(chave=numero_projeto, valor={nome_projeto, data_inicio_projeto, numero_gerente})
+chave=projeto_empregado, valor{numero_projeto, numero_empregado, horas_trabalhadas_projeto}
+ 
