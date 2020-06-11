@@ -1,90 +1,116 @@
 1. Crie um banco de dados chamado academico no MongoDB.
--- Adaptar para NoSQL
-CREATE TABLE aluno(
-  id_aluno INT NOT NULL,
-  nome_aluno VARCHAR(100) NOT NULL,
-  PRIMARY KEY(id_aluno)
-);
 
-CREATE TABLE disciplina(
-  id_disciplina INT NOT NULL,
-  nome_disciplina VARCHAR(100) NOT NULL,
-  carga_horaria INT CHECK(carga_horaria > 0),
-  PRIMARY KEY(id_disciplina)
-);
+db.createCollection("aluno", {
+  validator: {
+    $jsonSchema: {
+       bsonType: "object",
+       required: ["nome"],
+       properties: {
+          nome: { bsonType: "string", description: "deve ser uma string e obrigatorio" }
+       }
+    }
+  }
+});
 
-CREATE TABLE professor(
-  id_professor INT NOT NULL,
-  nome_professor VARCHAR(100) NOT NULL,
-  titulacao_professor VARCHAR(50) NOT NULL,
-  PRIMARY KEY(id_professor)
-);
+db.createCollection("disciplina", {
+  validator: {
+    $jsonSchema: {
+       bsonType: "object",
+       required: ["nome"],
+       properties: {
+          nome: { bsonType: "string", description: "deve ser uma string e obrigatorio" },
+	  cargaHoraria : { bsonType: "int", minimum: 0, description: "deve ser um inteiro maior igual a 0" }
+       }
+    }
+  }
+});
 
-CREATE TABLE turma(
-  id_turma INT NOT NULL,
-  num_periodo INT NOT NULL,
-  id_professor INT,
-  id_disciplina INT,
-  horario_aula VARCHAR(10),
-  num_sala VARCHAR(10),
-  PRIMARY KEY(id_turma),
-  FOREIGN KEY(id_professor) REFERENCES professor(id_professor) ON DELETE CASCADE,
-  FOREIGN KEY(id_disciplina) REFERENCES disciplina(id_disciplina)
-);
+db.createCollection("professor", {
+  validator: {
+    $jsonSchema: {
+       bsonType: "object",
+       required: ["nome", "titulacao"],
+       properties: {
+          nome: { bsonType: "string", description: "deve ser uma string e obrigatorio" },
+          titulacao: { bsonType: "string", description: "deve ser uma string e obrigatorio" },
+       }
+    }
+  }
+});
 
-CREATE TABLE historico(
-  id_historico INT NOT NULL,
-  id_turma INT NOT NULL,
-  id_aluno INT NOT NULL,
-  num_faltas SMALLINT,
-  media_final DECIMAL(3,1),
-  PRIMARY KEY(id_historico),
-  FOREIGN KEY(id_turma) REFERENCES turma(id_turma) ON DELETE CASCADE,
-  FOREIGN KEY(id_aluno) REFERENCES aluno(id_aluno)
-);
+db.createCollection("turma", {
+  validator: {
+    $jsonSchema: {
+       bsonType: "object",
+       required: ["numPeriodo"],
+       properties: {
+         idProfessor: { bsonType: "objectId", description: "deve ser um objectId" },
+	 idDisciplina: { bsonType: "objectId", description: "deve ser um objectId" },
+	 horarioAula: { bsonType: "string", description: "deve ser uma string" },
+	 numSala: { bsonType: "string", description: "deve ser uma string" }
+       }
+    }
+  }
+});
+
+db.createCollection("historico", {
+  validator: {
+    $jsonSchema: {
+       bsonType: "object",
+       required: ["idTurma, idAluno"],
+       properties: {
+         idTurma: { bsonType: "objectId", description: "deve ser um objectId" },
+	 idAluno: { bsonType: "objectId", description: "deve ser um objectId" },
+	 numFaltas: { bsonType: "int", description: "deve ser um int" },
+	 mediaFinal: { bsonType: "double", description: "deve ser um double" }
+       }
+    }
+  }
+});
 
 
-2. Elabore os comandos JS em um banco de dados.
 
-b) Insira um registro na tabela aluno preechendo somente a coluna id_aluno com o valor 1. Qual foi o resultado?
+2. Elabore os comandos em um banco de dados MongoDB.
 
-c) Insira os seguintes registros na tabela aluno.
+b) Insira um documento na coleção aluno preechendo somente a coluna _id com o valor 1. Qual foi o resultado?
 
-id_aluno        nome_aluno
-1               JOSE
-2               MARIA
-3               BRUNO
-4               CARLA
-5               PEDRO
+c) Insira os seguintes documentos na coleção aluno.
 
-d) Insira um registro na tabela disciplina com os valores 1 para id_disciplina, BANCO DE DADOS I para nome_disciplina e -1 para carga_horaria. Qual foi o resultado?
+_id        nome
+1          JOSE
+2          MARIA
+3          BRUNO
+4          CARLA
+5          PEDRO
 
-e) Insira os seguintes registros na tabela disciplina.
+d) Insira um documento na coleção disciplina com os valores 1 para _id, BANCO DE DADOS I para nome e -1 para cargaHoraria. Qual foi o resultado?
 
-id_disciplina    nome_disciplina     carga_horaria
+e) Insira os seguintes documentos na coleção disciplina.
+
+_id              nome                cargaHoraria
 1                BANCO DE DADOS I    60
 2                BANCO DE DADOS II   60
 
-f) Insira os seguintes resgistros na tabela professor.
-id_professor   nome_professor
+f) Insira os seguintes documentos na coleção professor.
+_id            nome
 1              LETICIA
 2              JOSE REGINALDO
 
-g) Insira um registro na tabela turma com os valores 1 para id_turma, 20192 para num_periodo. Qual foi o resultado?
+g) Insira um documento na coleção turma com os valores 1 para _id, 20192 para numPeriodo. Qual foi o resultado?
 
-h) Insira um registro na tabela turma com os valores 1 para id_turma, 20201 para num_periodo. Qual foi o resultado?
+h) Insira um documento na coleção turma com os valores 1 para _id, 20201 para numPeriodo. Qual foi o resultado?
 
-i) Insira um registro na tabela turma com os valores 2 para id_turma, 20201 para num_periodo e 3 para id_professor. Qual foi o resultado?
+i) Insira um documento na coleção turma com os valores 2 para _id, 20201 para numPeriodo e 3 para idProfessor. Qual foi o resultado?
 
-j) Insira os registros na tabela turma.
+j) Insira os documentos na coleção turma.
 
-id_turma   num_periodo   id_professor  id_disciplina
+_id         numPeriodo   idProfessor  idDisciplina
 3          20201         1             1
 4          20202         2             2
 
-k) Insira os registros na tabela historico.
+k) Insira os registros na coleção historico.
 
-id_historico    id_turma   id_aluno
+_id             idTurma   idAluno
 1               1          1
 2               1          2
 3               1          3
@@ -96,13 +122,12 @@ id_historico    id_turma   id_aluno
 	   
 l) Altere o nome do aluno JOSE para JOAO.
 
-m) Altere o id_disciplina de BANCO DE DADOS I para o valor 3. Qual foi o resultado?
+m) Altere o _id de BANCO DE DADOS I para o valor 3. Qual foi o resultado?
 
-n) Altere a media_final dos alunos que estão na turma de BANCO DE DADOS II para 5.
+n) Altere a mediaFinal dos alunos que estão na turma de BANCO DE DADOS II para 5.
 
 o) Exclua o aluno PEDRO. Qual foi o resultado?
 
 p) Exclua a disciplina BANCO DE DADOS II. Qual foi o resultado?
 
 q) Exclua o professor JOSE REGINALDO. Qual foi o resultado?
-

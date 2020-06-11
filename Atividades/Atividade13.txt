@@ -8,7 +8,7 @@ c) Forneça chave primária, número de faltas e media final dos alunos matricul
 
 d) Forneça chave primária dos alunos que não possuem media final na disciplina 1.
 
-e) Encontre chave primaria e nome do alunos que não foram reprovados (num_faltas < 75% ou nota < 5) em alguma disciplina.
+e) Encontre nome do alunos que não foram reprovados (num_faltas < 75% ou nota < 5) em alguma disciplina.
 
 f) Liste, em ordem alfabética, os alunos que tiveram aula com o professor JOSE REGINALDO.
 
