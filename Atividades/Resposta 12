@@ -303,6 +303,38 @@ WriteResult({ "nMatched" : 1, "nUpserted" : 0, "nModified" : 1 })
 { "_id" : 4, "nome" : "CARLA" }
 { "_id" : 5, "nome" : "PEDRO" }
 
+2.m)
+
+> db.disciplina.update({"nome" : "BANCO DE DADOS I"}, {$set : {_id: 3}})
+WriteResult({ "nMatched" : 0, "nUpserted" : 0, "nModified" : 0 })
+
+2.n)
+
+>  db.historico.update({"nome" : "BANCO DE DADOS II"}, {$set : {mediaFinal: 5 }})
+WriteResult({ "nMatched" : 0, "nUpserted" : 0, "nModified" : 0 })
+
+2.o)
+
+> db.aluno.remove({ "_id" : 5, "nome" : "PEDRO"})
+WriteResult({ "nRemoved" : 1 })
+> db.aluno.find()
+{ "_id" : 1, "nome" : "JOAO" }
+{ "_id" : 2, "nome" : "MARIA" }
+{ "_id" : 3, "nome" : "BRUNO" }
+{ "_id" : 4, "nome" : "CARLA" }
+
+
+2.p)
+
+> db.disciplina.remove({  _id: 1, "nome" : "BANCO DE DADOS II", "cargaHoraria": 60})
+WriteResult({ "nRemoved" : 0 })
+
+2.q)
+
+>  db.professor.remove({ _id: 2, "nome": "JOSE REGINALDO"})
+WriteResult({ "nRemoved" : 0 })
+
+
 
 
 
