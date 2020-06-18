@@ -64,6 +64,7 @@ WriteResult({
                 "errmsg" : "Document failed validation"
  
 2.c)
+
 > db.aluno.insert({_id: 1, "nome" : "Jose"})
 WriteResult({ "nInserted" : 1 })
 > db.aluno.find()
@@ -100,6 +101,7 @@ WriteResult({ "nInserted" : 1 })
 { "_id" : 5, "nome" : "PEDRO" }
 
 2.d)
+
 > db.disciplina.insert({_id: 1, "nome" :  "BANCO DE DADOS I", "cargaHoraria" : -1})
 WriteResult({
         "nInserted" : 0,
@@ -109,7 +111,8 @@ WriteResult({
         }
 })
 
-2.e)  ( TENTEI DE TODAS AS FORMAS, MESMO COPIANDO OS OUTROS E DEU ERRO)
+2.e)  ( TENTEI DE TODAS AS FORMAS, MESMO COPIANDO OS OUTROS DEU ERRO)
+
 >  db.disciplina.insert({_id: 1, nome:  "BANCO DE DADOS I",  cargaHoraria : 60})
 WriteResult({
         "nInserted" : 0,
@@ -129,4 +132,177 @@ WriteResult({
 })
 
 2.f) 
+
+> db.professor.insert({_id: 1, "nome" : "LETICIA"})
+WriteResult({
+        "nInserted" : 0,
+        "writeError" : {
+                "code" : 121,
+                "errmsg" : "Document failed validation"
+        }
+})
+
+> db.professor.insert({_id: 2, "nome" : "JOSE REGINALDO"})
+WriteResult({
+        "nInserted" : 0,
+        "writeError" : {
+                "code" : 121,
+                "errmsg" : "Document failed validation"
+        }
+})
+
+2.g) 
+
+> db.turma.insert({_id: 1, "numPeriodo": 20192})
+WriteResult({ "nInserted" : 1 })
+> db.turma.find()
+{ "_id" : 1, "numPeriodo" : 20192 }
+
+2.h)
+
+>  db.turma.insert({_id: 1, "numPeriodo": 20201})
+WriteResult({
+        "nInserted" : 0,
+        "writeError" : {
+                "code" : 11000,
+                "errmsg" : "E11000 duplicate key error collection: academico_trab.turma index: _id_ dup key: { _id: 1.0 }"
+        }
+})
+
+2.i)
+
+>   db.turma.insert({_id: 2, "numPeriodo": 20201, "idProfessor": 3})
+WriteResult({
+        "nInserted" : 0,
+        "writeError" : {
+                "code" : 121,
+                "errmsg" : "Document failed validation"
+        }
+})
+
+2.j)
+
+> db.turma.insert({"_id": 3, "numPeriodo": 20201, "idProfessor": 1, "idDisciplina": 1})
+WriteResult({
+        "nInserted" : 0,
+        "writeError" : {
+                "code" : 121,
+                "errmsg" : "Document failed validation"
+        }
+})
+
+>  db.turma.insert({_id: 4, numPeriodo: 20202, idProfessor: 2, idDisciplina: 2})
+WriteResult({
+        "nInserted" : 0,
+        "writeError" : {
+                "code" : 121,
+                "errmsg" : "Document failed validation"
+        }
+})
+
+2.k)
+
+> db.historico.insert({_id: 1, idTurma: 1, id_aluno: 1})
+WriteResult({
+        "nInserted" : 0,
+        "writeError" : {
+                "code" : 121,
+                "errmsg" : "Document failed validation"
+        }
+})
+
+> db.historico.insert({_id: 2, idTurma: 1, idAluno: 2})
+WriteResult({
+        "nInserted" : 0,
+        "writeError" : {
+                "code" : 121,
+                "errmsg" : "Document failed validation"
+        }
+})
+
+> db.historico.insert({_id: 3, idTurma: 1, idAluno: 3})
+WriteResult({
+        "nInserted" : 0,
+        "writeError" : {
+                "code" : 121,
+                "errmsg" : "Document failed validation"
+        }
+})
+
+> db.historico.insert({_id: 4, idTurma: 1, idAluno: 4})
+WriteResult({
+        "nInserted" : 0,
+        "writeError" : {
+                "code" : 121,
+                "errmsg" : "Document failed validation"
+        }
+})
+
+> db.historico.insert({_id: 5, idTurma: 3, idAluno: 1})
+WriteResult({
+        "nInserted" : 0,
+        "writeError" : {
+                "code" : 121,
+                "errmsg" : "Document failed validation"
+        }
+})
+
+> db.historico.insert({_id: 5, idTurma: 3, idAluno: 1})
+WriteResult({
+        "nInserted" : 0,
+        "writeError" : {
+                "code" : 121,
+                "errmsg" : "Document failed validation"
+        }
+})
+
+> db.historico.insert({_id: 5, idTurma: 3, idAluno: 1})
+WriteResult({
+        "nInserted" : 0,
+        "writeError" : {
+                "code" : 121,
+                "errmsg" : "Document failed validation"
+        }
+})
+
+> db.historico.insert({_id: 6, idTurma: 3, idAluno: 2})
+WriteResult({
+        "nInserted" : 0,
+        "writeError" : {
+                "code" : 121,
+                "errmsg" : "Document failed validation"
+        }
+})
+
+> db.historico.insert({_id: 7, idTurma: 4, idAluno: 3})
+WriteResult({
+        "nInserted" : 0,
+        "writeError" : {
+                "code" : 121,
+                "errmsg" : "Document failed validation"
+        }
+})
+
+> db.historico.insert({_id: 8, idTurma: 4, idAluno: 4})
+WriteResult({
+        "nInserted" : 0,
+        "writeError" : {
+                "code" : 121,
+                "errmsg" : "Document failed validation"
+        }
+})
+
+2.l)
+
+>  db.aluno.update({"_id" : 1}, {$set : {nome: "JOAO"}})
+WriteResult({ "nMatched" : 1, "nUpserted" : 0, "nModified" : 1 })
+>  db.aluno.find()
+{ "_id" : 1, "nome" : "JOAO" }
+{ "_id" : 2, "nome" : "MARIA" }
+{ "_id" : 3, "nome" : "BRUNO" }
+{ "_id" : 4, "nome" : "CARLA" }
+{ "_id" : 5, "nome" : "PEDRO" }
+
+
+
 
