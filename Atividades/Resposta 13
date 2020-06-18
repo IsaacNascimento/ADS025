@@ -1,0 +1,14 @@
+a) Forneça nome dos professores.
+
+> db.professores.find({}).sort({nome: 1})
+{ "_id" : ObjectId("5eeb31c9b59539578ecf1c75"), "matricula" : 3070, "nome" : "Gabriela" }
+{ "_id" : ObjectId("5eebce62a050bf88d3085fa6"), "matricula" : 2, "nome" : "JOSE REGINALDO" }
+{ "_id" : ObjectId("5eeb1b76b59539578ecf1c72"), "matricula" : 3060, "nome" : "Joao" }
+{ "_id" : ObjectId("5eeb169cb59539578ecf1c70"), "matricula" : 3056, "nome" : "Jose" }
+{ "_id" : ObjectId("5eebc775a050bf88d3085fa3"), "matricula" : 3100, "nome" : "LETICIA" }
+{ "_id" : ObjectId("5eebce4da050bf88d3085fa5"), "matricula" : 1, "nome" : "LETICIA" }
+{ "_id" : ObjectId("5eeb998259eb5114267223a4"), "matricula" : 3080, "nome" : "Lucas" }
+{ "_id" : ObjectId("5eeba42a59eb5114267223a6"), "matricula" : 3090, "nome" : "Mateus" }
+
+
+b) Liste os alunos cujo nome terminam em A.
