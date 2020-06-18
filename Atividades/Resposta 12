@@ -99,3 +99,34 @@ WriteResult({ "nInserted" : 1 })
 { "_id" : 4, "nome" : "CARLA" }
 { "_id" : 5, "nome" : "PEDRO" }
 
+2.d)
+> db.disciplina.insert({_id: 1, "nome" :  "BANCO DE DADOS I", "cargaHoraria" : -1})
+WriteResult({
+        "nInserted" : 0,
+        "writeError" : {
+                "code" : 121,
+                "errmsg" : "Document failed validation"
+        }
+})
+
+2.e)  ( TENTEI DE TODAS AS FORMAS, MESMO COPIANDO OS OUTROS E DEU ERRO)
+>  db.disciplina.insert({_id: 1, nome:  "BANCO DE DADOS I",  cargaHoraria : 60})
+WriteResult({
+        "nInserted" : 0,
+        "writeError" : {
+                "code" : 121,
+                "errmsg" : "Document failed validation"
+        }
+})
+
+> db.disciplina.insert({_id: 2, "nome":  "BANCO DE DADOS II",  "cargaHoraria" : 60})
+WriteResult({
+        "nInserted" : 0,
+        "writeError" : {
+                "code" : 121,
+                "errmsg" : "Document failed validation"
+        }
+})
+
+2.f) 
+
