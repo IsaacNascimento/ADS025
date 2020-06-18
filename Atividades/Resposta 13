@@ -12,3 +12,11 @@ a) Forneça nome dos professores.
 
 
 b) Liste os alunos cujo nome terminam em A.
+
+>  db.alunos.find({ nome: /a$/i})
+{ "_id" : ObjectId("5eeb1a12b59539578ecf1c71"), "matricula" : 2020300, "nome" : "Maria" }
+
+
+c) Forneça chave primária, número de faltas e media final dos alunos matriculados na turma 1.
+
+
